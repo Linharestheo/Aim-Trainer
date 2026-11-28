@@ -1,6 +1,7 @@
 const arena = document.getElementById("arena");
 const placar = document.getElementById("placar");
 const iniciar = document.getElementById("btn-iniciar");
+const limpar = document.getElementById("btn-limpar")
 
 let alvosAtivos = [];
 let pontosAcumulados = [];
@@ -53,10 +54,24 @@ function acertarAlvo(dadosAlvo) {
 }
 
 let jogoIniciado = false;
+let intervalo = null;
 
 iniciar.addEventListener('click', () => {
     if (jogoIniciado) return;
     jogoIniciado = true;
 
-    setInterval(criarAlvo, 200);
+    intervalo = setInterval(criarAlvo, 200);
 });
+
+limpar.addEventListener('click', () => {
+    clearInterval(intervalo);
+    intervalo = null;
+    jogoIniciado = false;
+
+    alvosAtivos.forEach((item) => item.elemento.remove());
+    alvosAtivos = [];
+
+    pontosAcumulados = [];
+    placar.textContent = 0;
+});
+

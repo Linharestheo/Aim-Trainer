@@ -25,7 +25,7 @@ function criarAlvo() {
         acertado: false
     };
 
-    alvo.addEventListener('click', () => {
+    alvo.addEventListener('pointerdown', () => {
         acertarAlvo(dadosAlvo);
     });
 
@@ -45,12 +45,8 @@ function acertarAlvo(dadosAlvo) {
     const total = pontosAcumulados.reduce((acumulador, atual) => acumulador + atual, 0);
     placar.textContent = total;
 
-    dadosAlvo.elemento.classList.remove("visivel");
-
-    setTimeout(() => {
-        dadosAlvo.elemento.remove();
-        alvosAtivos = alvosAtivos.filter((item) => item !== dadosAlvo);
-    }, 200);
+    alvosAtivos = alvosAtivos.filter((item) => item !== dadosAlvo);
+    dadosAlvo.elemento.remove();
 }
 
 let jogoIniciado = false;
